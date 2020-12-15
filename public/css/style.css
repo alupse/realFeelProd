@@ -104,10 +104,10 @@ body {
   box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
 }
 .alert--success {
-  background-color: #20bf6b;
+  background-color: #82ddac;
 }
 .alert--error {
-  background-color: #eb4d4b;
+  background-color: #e66563;
 }
 
 .heading-secondary {
@@ -123,15 +123,7 @@ body {
   );
 }
 .heading-secondary--error {
-  background-image: -webkit-gradient(
-    linear,
-    left top,
-    right top,
-    from(#ff7730),
-    to(#eb4d4b)
-  );
-  background-image: linear-gradient(to right, #ff7730, #eb4d4b);
-  font-size: 3.5rem;
+  font-size: 4rem;
 }
 
 .heading-primary,
@@ -1344,4 +1336,11 @@ body {
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
+}
+
+.error_image {
+  align-items: center;
+  width: 150px;
+  height: 150px;
+  display: inline-block;
 }

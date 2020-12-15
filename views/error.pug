@@ -1,0 +1,9 @@
+extends base
+
+block content
+  main.main
+    .error
+      .error__title
+        h2.heading-secondary.heading-secondary--error Hey you! Something went wrong!   
+        img.error_image(src=`/img/errorPicture.png`, alt=`Error Picture`)
+      .error_msg= msg
