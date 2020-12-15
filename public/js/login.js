@@ -23,22 +23,18 @@
 const login = async (email, password) => {
   try {
     const res = await axios({
-      mehod: 'POST',
-      url: '/api/v1/users/login',
+      method: 'POST',
+      url: 'http://127.0.0.1:3000/api/v1/users/login',
       data: {
         email: email,
         password: password,
       },
       withCredentials: true,
     });
-    const cookie = res.cookie('jwt', token, cookieOptions);
-    console.log(email, password);
-    console.log(cookie);
   } catch (err) {
     console.log(err.response);
     alert('error', err.response);
   }
-  console.log(res);
 };
 
 document.querySelector('.form').addEventListener('submit', (e) => {

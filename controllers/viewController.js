@@ -37,7 +37,13 @@ exports.getTour = catchAsync(async (req, res, next) => {
 // 3 Render template using the data from step 1
 
 exports.getLoginForm = (req, res) => {
-  res.status(200).render('login', {
-    title: 'Log into your account',
-  });
+  res
+    .status(200)
+    .set(
+      'Content-Security-Policy',
+      "script-src 'self' https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js 'unsafe-inline' 'unsafe-eval';"
+    )
+    .render('login', {
+      title: 'Log into your account',
+    });
 };
