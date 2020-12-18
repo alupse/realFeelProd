@@ -768,9 +768,9 @@ body {
     left top,
     right bottom,
     from(#d6a8e2),
-    to(#867291)
+    to(#52425a)
   );
-  background-image: linear-gradient(to right bottom, #7dd56f, #28b487);
+  background-image: linear-gradient(to right bottom, #ccafd3, #52425a);
   padding: 4rem 0;
 }
 .user-view__content {
