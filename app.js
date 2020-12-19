@@ -15,6 +15,7 @@ const globalErrorHandler = require('./controllers/errorController');
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
+const bookingRouter = require('./routes/bookingRoutes');
 const viewRouter = require('./routes/viewRoutes');
 
 const app = express();
@@ -25,6 +26,7 @@ app.use(
       defaultSrc: ["'self'", 'https:', 'http:', 'data:', 'ws:'],
       baseUri: ["'self'"],
       fontSrc: ["'self'", 'https:', 'http:', 'data:'],
+      frameSrc: ["'self'", 'https://js.stripe.com'],
       scriptSrc: ["'self'", 'https:', 'http:', 'blob:'],
       styleSrc: ["'self'", "'unsafe-inline'", 'https:', 'http:'],
     },
@@ -59,8 +61,27 @@ app.use(
       defaultSrc: ["'self'", 'https:', 'http:', 'data:', 'ws:'],
       baseUri: ["'self'"],
       fontSrc: ["'self'", 'https:', 'http:', 'data:'],
-      scriptSrc: ["'self'", 'https:', 'http:', 'blob:'],
+      scriptSrc: [
+        "'self'",
+        'https:',
+        'http:',
+        'blob:',
+        'https://js.stripe.com',
+      ],
+      frameSrc: ["'self'", 'https://js.stripe.com'],
       styleSrc: ["'self'", "'unsafe-inline'", 'https:', 'http:'],
+      connectSrc: [
+        "'self'",
+        "'unsafe-inline'",
+        'data:',
+        'blob:',
+        'https://*.stripe.com',
+        'https://*.mapbox.com',
+        'https://*.cloudflare.com/',
+        'https://bundle.js:*',
+        'ws://127.0.0.1:*/',
+      ],
+      upgradeInsecureRequests: [],
     },
   })
 );
@@ -115,6 +136,7 @@ app.use('/', viewRouter);
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reviewRouter);
+app.use('/api/v1/booking', bookingRouter);
 
 //all - for all the http methods
 app.all('*', (req, res, next) => {

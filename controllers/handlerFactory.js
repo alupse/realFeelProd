@@ -47,6 +47,7 @@ exports.createOne = (Model) =>
 exports.getOne = (Model, popOptions) =>
   catchAsync(async (req, res, next) => {
     let query = Model.findById(req.params.id);
+    console.log(req.params.id);
 
     if (popOptions) query = query.populate(popOptions);
     console.log(query);
