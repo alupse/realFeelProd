@@ -82,6 +82,7 @@ exports.getForgotPasswordForm = (req, res) => {
     )
     .render('forgotPassword', {
       title: 'Recover your password',
+      token: req.params.token,
     });
 };
 
