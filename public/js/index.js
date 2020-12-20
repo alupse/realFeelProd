@@ -4,6 +4,8 @@ import '@babel/polyfill';
 import { displayMap } from './mapbox';
 import { login, logout } from './login.js';
 import { signup } from './signup.js';
+import { forgotPassword } from './forgotPassword.js';
+import { resetPassword } from './resetPassword.js';
 import { updateSettings } from './updateSettings';
 import { bookTour } from './stripe';
 
@@ -12,13 +14,15 @@ import { bookTour } from './stripe';
 const mapBox = document.getElementById('map');
 const loginForm = document.querySelector('.form--login');
 const signupForm = document.querySelector('.form--signup');
+const forgotPasswordForm = document.querySelector('.form--forgotPassword');
+const resetPasswordForm = document.querySelector('.form--resetPassword');
+const token = document.querySelector('.tok');
 const logOutBtn = document.querySelector('.nav__el--logout');
 const updateDataForm = document.querySelector('.form-user-data');
 const updatePasswordForm = document.querySelector('.form-user-password');
 const bookBtn = document.getElementById('book-tour');
 
 //values
-
 //delegation
 
 if (mapBox) {
@@ -41,15 +45,31 @@ if (loginForm) {
 if (logOutBtn) logOutBtn.addEventListener('click', logout);
 
 if (signupForm) {
-  console.log('Am ajuns');
   signupForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const passwordConfirm = document.getElementById('passwordConfirm').value;
-    console.log('pana aici');
     signup(name, email, password, passwordConfirm);
+  });
+}
+
+if (forgotPasswordForm) {
+  forgotPasswordForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    forgotPassword(email);
+  });
+}
+
+if (resetPasswordForm) {
+  resetPasswordForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const password = document.getElementById('password').value;
+    const passwordConfirm = document.getElementById('password-confirm').value;
+
+    resetPassword(password, passwordConfirm);
   });
 }
 
@@ -60,7 +80,6 @@ if (updateDataForm) {
     form.append('name', document.getElementById('name').value);
     form.append('email', document.getElementById('email').value);
     form.append('photo', document.getElementById('photo').files[0]);
-    console.log(form);
 
     // const email = document.getElementById('email').value;
     // const name = document.getElementById('name').value;

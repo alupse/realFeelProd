@@ -71,3 +71,30 @@ exports.getSignupForm = (req, res) => {
       title: 'Create a new account',
     });
 };
+
+exports.getForgotPasswordForm = (req, res) => {
+  console.log('Am ajuns chiar aici');
+  res
+    .status(200)
+    .set(
+      'Content-Security-Policy',
+      "script-src 'self' https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js 'unsafe-inline' 'unsafe-eval';"
+    )
+    .render('forgotPassword', {
+      title: 'Recover your password',
+    });
+};
+
+exports.getResetPasswordForm = (req, res) => {
+  console.log('Am ajuns chiar aici');
+  res
+    .status(200)
+    .set(
+      'Content-Security-Policy',
+      "script-src 'self' https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js 'unsafe-inline' 'unsafe-eval';"
+    )
+    .render('resetPassword', {
+      title: 'Change your password',
+      token: req.params.token,
+    });
+};
