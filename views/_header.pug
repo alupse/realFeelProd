@@ -1,6 +1,12 @@
 header.header
     nav.nav.nav--tours
         a.nav__el(href='/') All tours
+        .dropdown.nav__el
+            button.nav__el.dropbtn Options
+            .dropdown-content
+                a(href='/top-5-cheap') Get 5 cheapest tours
+                a#getToursNearMe(href='#') Get tours within 400 km
+
     .header__logo
         img(src='/img/logo.png', alt='RealFeel logo')
         img(src='/img/realFeelText.png', alt='RealFeel logo')

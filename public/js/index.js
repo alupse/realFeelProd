@@ -6,7 +6,10 @@ import { login, logout } from './login.js';
 import { signup } from './signup.js';
 import { forgotPassword } from './forgotPassword.js';
 import { resetPassword } from './resetPassword.js';
+import { deleteUser } from './adminCrud.js';
+import { getCoordinatesBOTH } from './userCoordinates.js';
 import { updateSettings } from './updateSettings';
+import { leaveReview } from './leaveReview';
 import { bookTour } from './stripe';
 
 //DOM elements
@@ -21,6 +24,12 @@ const logOutBtn = document.querySelector('.nav__el--logout');
 const updateDataForm = document.querySelector('.form-user-data');
 const updatePasswordForm = document.querySelector('.form-user-password');
 const bookBtn = document.getElementById('book-tour');
+const nearMeBtn = document.getElementById('getToursNearMe');
+const usr = document.querySelector('.usr');
+const delicn = document.querySelector('.iconDelete');
+//const userId = document.getElementById('idUser').value;
+const deleteUserBtn = document.getElementById('deleteBtn');
+const leaveReviewForm = document.querySelector('.form--leaveReview');
 
 //values
 //delegation
@@ -43,6 +52,24 @@ if (loginForm) {
 }
 
 if (logOutBtn) logOutBtn.addEventListener('click', logout);
+if (nearMeBtn) {
+  nearMeBtn.addEventListener('click', (e) => {
+    console.log('Intru in near me');
+    getCoordinatesBOTH().subscribe;
+  });
+}
+if (deleteUserBtn)
+  deleteUserBtn.addEventListener('click', (e) => {
+    //e.preventDefault();
+    //   const userIdToDelete = document.getElementById('.id').value;
+    //const { user._id} = e.target.dataset;
+    //rId = document.getElementById('idUser').value;
+    console.log(document.getElementById('deleteBtn').idToDelete);
+    console.log('Intru in delete');
+    console.log(delicn);
+
+    deleteUser();
+  });
 
 if (signupForm) {
   signupForm.addEventListener('submit', (e) => {
@@ -52,6 +79,22 @@ if (signupForm) {
     const password = document.getElementById('password').value;
     const passwordConfirm = document.getElementById('passwordConfirm').value;
     signup(name, email, password, passwordConfirm);
+  });
+}
+
+if (leaveReviewForm) {
+  leaveReviewForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const tourId = document.getElementById('tour').value;
+    const reviewRatingValue = document.getElementById('reviewRatingValue')
+      .value;
+    const reviewText = document.getElementById('reviewText').value;
+    console.log(tourId);
+    console.log('miau');
+    // const password = document.getElementById('password').value;
+    //const passwordConfirm = document.getElementById('passwordConfirm').value;
+    // signup(name, email, password, passwordConfirm);
+    leaveReview(tourId, reviewRatingValue, reviewText);
   });
 }
 

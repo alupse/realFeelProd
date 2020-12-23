@@ -5,12 +5,15 @@ const User = require('./../models/userModel');
 const catchAsync = require('./../utils/catchAsync');
 const appError = require('../utils/appError');
 const Email = require('../utils/email');
-
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
 };
+// const desactiv =(id) =>{
+//   const user = await User.findById(id);
+//    await user.desactivate();
+// }
 
 const createAndSendToken = (user, statusCode, res) => {
   const token = signToken(user._id);
@@ -47,6 +50,7 @@ exports.signUp = catchAsync(async (req, res, next) => {
 
 exports.login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
+  console.log(req.body + 'corp');
 
   // 1 Check if email and pass exists
   if (!email || !password) {
@@ -57,14 +61,22 @@ exports.login = catchAsync(async (req, res, next) => {
   //By default password is not selected, but using .select(+password) we explicitly selected
 
   const user = await User.findOne({ email }).select('+password');
-
-  if (!user || !(await user.correctPassword(password, user.password))) {
+  if (
+    !user ||
+    !(await user.correctPassword(password, user.password)) ||
+    user.active === false
+  ) {
     return next(new appError('Incorrect email or password', 401));
+  }
+  if (user.active === false) {
+    const activatedUser = await User.updateOne({ active: true });
+    alert('Account was reactivated');
+    createAndSendToken(activatedUser, 200, res);
+  } else {
+    createAndSendToken(user, 200, res);
   }
 
   // 3 If everything is ok, send token to client
-
-  createAndSendToken(user, 200, res);
 });
 
 exports.logout = (req, res) => {
@@ -250,3 +262,15 @@ exports.isLoggedIn = async (req, res, next) => {
   next();
   //2 Verification the token
 };
+
+exports.desactactivateAccount = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.user._id);
+  await user.desactivate();
+  console.log('intru aici in authcontroller');
+
+  await User.findByIdAndUpdate(req.user.id, user);
+  // await User.update();
+  console.log(user);
+
+  next();
+});

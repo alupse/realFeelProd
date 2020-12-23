@@ -50,7 +50,6 @@ const userSchema = new mongoose.Schema({
   active: {
     type: Boolean,
     default: true,
-    select: false,
   },
 
   // {
@@ -83,7 +82,7 @@ userSchema.pre('save', function (next) {
 
 userSchema.pre(/^find/, function (next) {
   //this points to the current query
-  this.find({ active: { $ne: false } });
+  //this.find({ active: { $ne: false } });
   next();
 });
 
@@ -94,6 +93,13 @@ userSchema.methods.correctPassword = async function (
   return await bcrypt.compare(candidatePassword, userPassword);
 };
 
+userSchema.methods.desactivate = async function () {
+  this.active = false;
+};
+
+userSchema.methods.activate = async function () {
+  this.active = true;
+};
 userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
   if (this.passwordChangedAt) {
     //converted the time into miliseconds to match the JWTTimestamp format

@@ -46,9 +46,9 @@ const importData = async () => {
 //Delete all data from DB
 const deleteData = async () => {
   try {
-    await Tour.deleteMany();
+    //await Tour.deleteMany();
     await User.deleteMany();
-    await Review.deleteMany();
+    // await Review.deleteMany();
     console.log('Data succesfully deleted');
   } catch (err) {
     console.log(err);

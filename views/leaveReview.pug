@@ -1,0 +1,28 @@
+extends base
+mixin tourToReview(tourName,tourId)
+    option(value=`${tourId}`)= `${tourName}`
+mixin reviewRating()
+    option(value=1)=1
+    option(value=2)=2
+    option(value=3)=3
+    option(value=4)=4
+    option(value=5)=5
+block content
+    main.main
+        .leaveReview-form
+            h2.heading-secondary.ma-bt-lg Review booked tours
+            form.form.form--leaveReview
+                .form__group
+                    label.form__label Select Tour
+                    select#tour(name='tours')
+                        each tour in tours 
+                            +tourToReview(tour.name, tour._id)
+                .form__group
+                    label.form__label Select Rating
+                    select#reviewRatingValue
+                            +reviewRating()  
+                .form__group.ma-bt-md
+                    label.form__label Text
+                    textarea#reviewText.form1__input( placeholder='Review', required, minlength='6')
+                .form__group
+                    button.btn.btn--green Submit

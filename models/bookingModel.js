@@ -23,6 +23,10 @@ const bookingSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
+  reviewed: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 bookingSchema.pre(/^find/, function (next) {
@@ -30,6 +34,7 @@ bookingSchema.pre(/^find/, function (next) {
     path: 'tour',
     select: 'name',
   });
+  next();
 });
 
 const Booking = mongoose.model('Booking', bookingSchema);

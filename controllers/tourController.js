@@ -57,7 +57,7 @@ exports.resizeTourImages = catchAsync(async (req, res, next) => {
 
 exports.alliasTopTours = (req, res, next) => {
   req.query.limit = '5';
-  req.query.sort = '-ratingsAverage,price';
+  req.query.sort = 'price';
   req.query.fields - 'name,price,ratingAverage,summary,difficulty';
   next();
 };
@@ -142,6 +142,7 @@ exports.getMonthlyPlan = catchAsync(async (req, res, next) => {
 exports.getToursWithin = catchAsync(async (req, res, next) => {
   // /tours-distance/233/center/33.994962, -117.984051/unit/mi
 
+  console.log('Aic e ' + req.query);
   const { distance, latlng, unit } = req.params;
   const [lat, lng] = latlng.split(',');
 
