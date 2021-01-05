@@ -22,6 +22,9 @@ export const resetPassword = async (password, passwordConfirm) => {
     }
   } catch (err) {
     console.log(err.response);
-    showAlert('error', err.response.data.message);
+    showAlert(
+      'error',
+      'Something went wrong. Please make sure your passwords match'
+    );
   }
 };

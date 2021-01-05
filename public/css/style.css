@@ -1231,6 +1231,15 @@ body {
   padding: 5rem 7rem;
   border-radius: 5px;
 }
+.createTour-form {
+  margin: 0 auto;
+  max-width: 55rem;
+  background-color: #fff;
+  -webkit-box-shadow: 0 2.5rem 8rem 2rem rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2.5rem 8rem 2rem rgba(0, 0, 0, 0.06);
+  padding: 5rem 7rem;
+  border-radius: 5px;
+}
 
 .form__input {
   display: block;
@@ -1407,8 +1416,8 @@ body {
   color: inherit;
   padding: 1.25rem 1.75rem;
   border: none;
-  width: 30%;
-  height: 150px;
+  width: 100%;
+  height: 350px;
   background-color: #fff;
   background-color: #f2f2f2;
   border-top: 3px solid transparent;

@@ -89,6 +89,7 @@ exports.logout = (req, res) => {
 
 exports.protect = catchAsync(async (req, res, next) => {
   //1 Getting the token and check if its there
+
   let token;
   if (
     req.headers.authorization &&
@@ -265,11 +266,26 @@ exports.isLoggedIn = async (req, res, next) => {
 
 exports.desactactivateAccount = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.user._id);
-  await user.desactivate();
-  console.log('intru aici in authcontroller');
 
+  await user.desactivate();
   await User.findByIdAndUpdate(req.user.id, user);
-  // await User.update();
+
+  console.log(user);
+
+  next();
+});
+
+exports.updateUserRole = catchAsync(async (req, res, next) => {
+  const { id, role } = req.params;
+  var updatedRole = '';
+  if (role === 'user') {
+    updatedRole = 'guide';
+  } else {
+    updatedRole = 'user';
+  }
+  const updateData = { role: `${updatedRole}` };
+
+  const user = await User.findByIdAndUpdate(id, updateData);
   console.log(user);
 
   next();

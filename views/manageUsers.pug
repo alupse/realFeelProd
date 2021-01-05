@@ -14,10 +14,8 @@ mixin userRecord(user, value)
 		td=`${user.active}`
 		td=`${user.role}`
 		td
-			a.edit(href='/manageusers/${user._id}' data-toggle='modal')
+			a#changeRoleButton(href=`/changeUserRole/${user._id}/${user.role}` data-toggle='modal' userRole=`${user.role}` userId=`${user._id}`)
 				i.material-icons(data-toggle='tooltip' title='Edit') &#xE254;
-			a.delete(href=`/manageusers/${user._id}` data-toggle='modal' idToDelete=`${user._id}`)
-				i.material-icons.iconDelete(data-toggle='tooltip' title='Delete' idToDelete=`${user._id}`) &#xE872;
 
 block content
 	main.main
@@ -39,7 +37,7 @@ block content
 								th Email
 								th Status
 								th Role
-								th Actions
+								th Change role
 						tbody
 							section.section-users
 								each user in users 

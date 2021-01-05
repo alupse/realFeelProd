@@ -108,6 +108,7 @@ exports.createUser = (req, res) => {
     message: 'This route is not defined! Please use signup instead',
   });
 };
+
 exports.updateUser = factory.updateOne(User);
 exports.deleteUser = factory.deleteOne(User);
 exports.getAllUsers = factory.getAll(User);

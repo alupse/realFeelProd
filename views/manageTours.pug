@@ -8,15 +8,19 @@ block append head
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
 mixin tourRecord(tour, value)
     tr
-        td#idTour.tour(value =`${tour._id}`)=`${tour._id}`
-        td=`${tour.name}`
+        td#idTour.tour()=`${tour._id}`
+         - const name= `${tour.slug}`
+        td#tourName
+            input(value=`${tour.name}` tourName=`${tour.name}`)
         td=`${tour.ratingAverage}`
-        td=`${tour.maxGroupSize}`
-        td=`${tour.price}`
+        td#tourMaxGroupSize
+            input(value=`${tour.maxGroupSize}` maxGroupSize=`${tour.maxGroupSize}`)
+        td#tourPrice
+            input(value=`${tour.price}` price=`${tour.price}`)
         td
-            a.edit(href='/managetours/${tour._id}' data-toggle='modal')
+            a.edit(href=`/modifyTour/${tour._id}/${name}/#{tourMaxGroupSize}/#{tourPrice}/` data-toggle='modal')
                 i.material-icons(data-toggle='tooltip' title='Edit') &#xE254;
-            a.delete(href=`/managetours/${tours._id}` data-toggle='modal' idToDelete=`${tour._id}`)
+            a.delete(href=`/deleteTour/${tour._id}/` data-toggle='modal' idToDelete=`${tour._id}`)
                 i.material-icons.iconDelete(data-toggle='tooltip' title='Delete' idToDelete=`${tour._id}`) &#xE872;
 
 block content

@@ -1,0 +1,37 @@
+extends base
+
+mixin inputFields(label, text, name)
+    .form__group
+        label.form__label(for='text') #{label}
+        input.form__input( placeholder=text, required)
+
+block content
+    main.main
+        .createTour-form
+            h2.heading-secondary.ma-bt-lg Create a new Tour
+            form.form.form--createTour
+                +inputFields('Tour Name', 'Give a name to the tour', 'name')
+                +inputFields('Slug', `Tour name slugified`, 'slug')
+                +inputFields('Difficulty', 'Specify the difficulty', 'difficulty')
+                +inputFields('Participants', `Specify max no of attenders`, 'maxGroupSize')
+                +inputFields('Duration', `Duration exprimed in hours`, 'duration')
+                +inputFields('Price', 'Price exprimed in dollars', 'price')
+                +inputFields('Summary', 'Short description of the tour', 'summary')
+                .form__group.ma-bt-md
+                    label.form__label Description
+                    textarea#tourDescription.form1__input( placeholder='Write more details about the tour', required, minlength='6')
+                .form__group.ma-bt-md
+                    label.form__label Dates
+                    textarea#tourDescription.form__input( placeholder='["2021-04-25T09:00:00.000Z",  "2021-05-20T09:00:00.000Z",  "2021-09-21T09:00:00.000Z"],', required, minlength='6')
+                .form__group.form__photo-upload
+                    input.form__upload(type='file', accept='image/*',id='photo', name='photo')
+                    label(for='photo') Choose cover photo  &nbsp;       
+                    input.form__upload(type='file', accept='image/*',id='photo', name='photo')
+                    label(for='photo') Choose photo 1 &nbsp;
+                    input.form__upload(type='file', accept='image/*',id='photo', name='photo')
+                    label(for='photo') Choose photo 2 &nbsp;
+                    input.form__upload(type='file', accept='image/*',id='photo', name='photo')
+                    label(for='photo') Choose photo 3 &nbsp;
+
+                .form__group
+                    button.btn.btn--green Create tour

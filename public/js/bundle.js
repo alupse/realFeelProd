@@ -9452,7 +9452,8 @@ var usr = document.querySelector('.usr');
 var delicn = document.querySelector('.iconDelete'); //const userId = document.getElementById('idUser').value;
 
 var deleteUserBtn = document.getElementById('deleteBtn');
-var leaveReviewForm = document.querySelector('.form--leaveReview'); //values
+var leaveReviewForm = document.querySelector('.form--leaveReview');
+var createTourForm = document.querySelector('.form--createTour'); //values
 //delegation
 
 if (mapBox) {

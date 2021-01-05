@@ -81,4 +81,36 @@ router.get(
   viewController.desactivateAccount
 );
 
+router.get(
+  '/createTour',
+  authController.protect,
+  authController.isLoggedIn,
+  authController.restrictTo('admin'),
+  viewController.getCreateTourForm
+);
+router.get(
+  '/changeUserRole/:id/:role',
+  authController.protect,
+  authController.isLoggedIn,
+  authController.restrictTo('admin'),
+  authController.updateUserRole,
+  viewController.getManageUsers
+);
+
+router.get(
+  '/deleteTour/:id',
+  authController.protect,
+  authController.isLoggedIn,
+  authController.restrictTo('admin'),
+  tourController.deleteTour,
+  viewController.getManageTours
+);
+router.get(
+  '/modifyTour/:id/:name/:groupSize/:price',
+  authController.protect,
+  authController.isLoggedIn,
+  authController.restrictTo('admin'),
+  tourController.updateTour,
+  viewController.getManageTours
+);
 module.exports = router;

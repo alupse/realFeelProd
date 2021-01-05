@@ -9,6 +9,7 @@ import { resetPassword } from './resetPassword.js';
 import { deleteUser } from './adminCrud.js';
 import { getCoordinatesBOTH } from './userCoordinates.js';
 import { updateSettings } from './updateSettings';
+import { changeRole } from './changeRole';
 import { leaveReview } from './leaveReview';
 import { bookTour } from './stripe';
 
@@ -29,8 +30,11 @@ const usr = document.querySelector('.usr');
 const delicn = document.querySelector('.iconDelete');
 //const userId = document.getElementById('idUser').value;
 const deleteUserBtn = document.getElementById('deleteBtn');
+const changeRoleButton = document.getElementById('changeRoleButton');
 const leaveReviewForm = document.querySelector('.form--leaveReview');
 
+const createTourForm = document.querySelector('.form--createTour');
+console.log(document.getElementById('changeRoleButton') + '----------');
 //values
 //delegation
 
@@ -56,6 +60,18 @@ if (nearMeBtn) {
   nearMeBtn.addEventListener('click', (e) => {
     console.log('Intru in near me');
     getCoordinatesBOTH().subscribe;
+  });
+}
+
+if (changeRoleButton) {
+  console.log('Macar pana aici suntem');
+  changeRoleButton.addEventListener('click', (e) => {
+    console.log('Intru in changerole buttone');
+    console.log(document.getElementById('changeRoleButton').userRole);
+    changeRole(
+      document.getElementById('changeRoleButton').userId,
+      document.getElementById('changeRoleButton').userRole
+    );
   });
 }
 if (deleteUserBtn)

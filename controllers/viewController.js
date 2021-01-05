@@ -226,3 +226,15 @@ exports.desactivateAccount = (req, res) => {
       title: 'Log into your account',
     });
 };
+
+exports.getCreateTourForm = catchAsync(async (req, res, next) => {
+  res
+    .status(200)
+    .set(
+      'Content-Security-Policy',
+      "script-src 'self' https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js 'unsafe-inline' 'unsafe-eval';"
+    )
+    .render('createTour', {
+      title: 'Create a new tour',
+    });
+});
