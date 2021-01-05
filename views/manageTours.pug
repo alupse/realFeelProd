@@ -8,20 +8,15 @@ block append head
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
 mixin tourRecord(tour, value)
     tr
-        td#idTour.tour()=`${tour._id}`
-         - const name= `${tour.slug}`
-        td#tourName
-            input(value=`${tour.name}` tourName=`${tour.name}`)
-        td=`${tour.ratingAverage}`
-        td#tourMaxGroupSize
-            input(value=`${tour.maxGroupSize}` maxGroupSize=`${tour.maxGroupSize}`)
-        td#tourPrice
-            input(value=`${tour.price}` price=`${tour.price}`)
-        td
-            a.edit(href=`/modifyTour/${tour._id}/${name}/#{tourMaxGroupSize}/#{tourPrice}/` data-toggle='modal')
-                i.material-icons(data-toggle='tooltip' title='Edit') &#xE254;
-            a.delete(href=`/deleteTour/${tour._id}/` data-toggle='modal' idToDelete=`${tour._id}`)
-                i.material-icons.iconDelete(data-toggle='tooltip' title='Delete' idToDelete=`${tour._id}`) &#xE872;
+        
+            td#idTour.tour()=`${tour._id}`
+            td#tourName(  placeholder =`${tour.name}` tourName=`${tour.name}`)=`${tour.name}`
+            td=`${tour.ratingAverage}`
+            td#tourMaxGroupSize( value=`${tour.maxGroupSize}` maxGroupSize=`${tour.maxGroupSize}`)=`${tour.maxGroupSize}`
+            td#tourPrice( value= `${tour.price}` price=`${tour.price}`)=`${tour.price}`
+            td 
+                    a.delete(href=`/deleteTour/${tour._id}/` data-toggle='modal' idToDelete=`${tour._id}`)
+                        i.material-icons.iconDelete(data-toggle='tooltip' title='Delete' idToDelete=`${tour._id}`) &#xE872;
 
 block content
     main.main
@@ -35,19 +30,20 @@ block content
                                     | Manage 
                                     b Tours
                             .col-xs-6
-                    table.table.table-striped.table-hover
-                        thead
-                            tr
-                                th Tour Id
-                                th Name
-                                th RatingAverage
-                                th Group Size
-                                th Price
-                                th Actions
-                        tbody
-                            section.section-tours
-                                each tour in tours 
-                                    +tourRecord(tour)
+                    form.tour-form       
+                        table.table.table-striped.table-hover
+                            thead
+                                tr
+                                    th Tour Id
+                                    th Name
+                                    th RatingAverage
+                                    th Group Size
+                                    th Price
+                                    th Actions
+                            tbody
+                                section.section-tours
+                                    each tour in tours 
+                                        +tourRecord(tour)
 
         //- // Edit Modal HTML
         //- #editEmployeeModal.modal.fade

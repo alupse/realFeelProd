@@ -9,8 +9,8 @@ import { resetPassword } from './resetPassword.js';
 import { deleteUser } from './adminCrud.js';
 import { getCoordinatesBOTH } from './userCoordinates.js';
 import { updateSettings } from './updateSettings';
-import { changeRole } from './changeRole';
 import { leaveReview } from './leaveReview';
+
 import { bookTour } from './stripe';
 
 //DOM elements
@@ -28,12 +28,9 @@ const bookBtn = document.getElementById('book-tour');
 const nearMeBtn = document.getElementById('getToursNearMe');
 const usr = document.querySelector('.usr');
 const delicn = document.querySelector('.iconDelete');
-//const userId = document.getElementById('idUser').value;
 const deleteUserBtn = document.getElementById('deleteBtn');
-const changeRoleButton = document.getElementById('changeRoleButton');
 const leaveReviewForm = document.querySelector('.form--leaveReview');
 
-const createTourForm = document.querySelector('.form--createTour');
 console.log(document.getElementById('changeRoleButton') + '----------');
 //values
 //delegation
@@ -63,17 +60,6 @@ if (nearMeBtn) {
   });
 }
 
-if (changeRoleButton) {
-  console.log('Macar pana aici suntem');
-  changeRoleButton.addEventListener('click', (e) => {
-    console.log('Intru in changerole buttone');
-    console.log(document.getElementById('changeRoleButton').userRole);
-    changeRole(
-      document.getElementById('changeRoleButton').userId,
-      document.getElementById('changeRoleButton').userRole
-    );
-  });
-}
 if (deleteUserBtn)
   deleteUserBtn.addEventListener('click', (e) => {
     //e.preventDefault();
@@ -107,9 +93,6 @@ if (leaveReviewForm) {
     const reviewText = document.getElementById('reviewText').value;
     console.log(tourId);
     console.log('miau');
-    // const password = document.getElementById('password').value;
-    //const passwordConfirm = document.getElementById('passwordConfirm').value;
-    // signup(name, email, password, passwordConfirm);
     leaveReview(tourId, reviewRatingValue, reviewText);
   });
 }
