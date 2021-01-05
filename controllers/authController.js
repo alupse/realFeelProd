@@ -50,7 +50,6 @@ exports.signUp = catchAsync(async (req, res, next) => {
 
 exports.login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
-  console.log(req.body + 'corp');
 
   // 1 Check if email and pass exists
   if (!email || !password) {
@@ -123,7 +122,7 @@ exports.protect = catchAsync(async (req, res, next) => {
   }
   //grant access to the protected route
   req.user = currentUser;
-  console.log(req.user);
+
   next();
 });
 
@@ -180,7 +179,6 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 exports.resetPassword = catchAsync(async (req, res, next) => {
   //1 Get user based on the token
 
-  console.log('Sunt aici');
   const hashedToken = crypto
     .createHash('sha256')
     .update(req.params.token)
@@ -193,7 +191,6 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
   //2 if token !expired and there is a user -> set new password
   if (!user) {
-    console.log('intrat');
     return next(new appError('Token is invalid or has expired', 400));
   }
 
@@ -270,8 +267,6 @@ exports.desactactivateAccount = catchAsync(async (req, res, next) => {
   await user.desactivate();
   await User.findByIdAndUpdate(req.user.id, user);
 
-  console.log(user);
-
   next();
 });
 
@@ -286,7 +281,6 @@ exports.updateUserRole = catchAsync(async (req, res, next) => {
   const updateData = { role: `${updatedRole}` };
 
   const user = await User.findByIdAndUpdate(id, updateData);
-  console.log(user);
 
   next();
 });

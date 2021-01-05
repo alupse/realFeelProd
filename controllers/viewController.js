@@ -22,10 +22,8 @@ exports.getCheapestTours = catchAsync(async (req, res, next) => {
   // 1 Get tour data from collection
   //tourController.alliasTopTours, tourController.getAllTours
   const lim = parseInt(req.query.limit);
-  console.log('INtra aici daa');
-  console.log(req.query);
+
   const tours = await Tour.find().limit(lim).sort(req.query.sort);
-  console.log(tours);
 
   // 2 Build templated tour
 
@@ -90,7 +88,6 @@ exports.getLoginForm = (req, res) => {
 };
 
 exports.getAccount = (req, res) => {
-  console.log('hei');
   res.status(200).render('account', {
     title: 'Your account',
     user: req.user,
@@ -122,7 +119,6 @@ exports.getSignupForm = (req, res) => {
 };
 
 exports.getForgotPasswordForm = (req, res) => {
-  console.log('Am ajuns chiar aici');
   res
     .status(200)
     .set(
@@ -136,7 +132,6 @@ exports.getForgotPasswordForm = (req, res) => {
 };
 
 exports.getResetPasswordForm = (req, res) => {
-  console.log('Am ajuns chiar aici');
   res
     .status(200)
     .set(
@@ -213,9 +208,9 @@ exports.desactivateAccount = (req, res) => {
     expires: new Date(Date.now() + 10 * 1000),
     httpOnly: true,
   });
-  console.log(req.user);
+
   req.user = undefined;
-  console.log(req.user + 'in faza 2');
+
   res
     .status(200)
     .set(

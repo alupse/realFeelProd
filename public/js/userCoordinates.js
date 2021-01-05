@@ -14,7 +14,7 @@ export const getCoordinatesBOTH = async () => {
 
     const lt = res1.data.loc.split(',')[0];
     const lg = res1.data.loc.split(',')[1];
-    let url2 = `http://127.0.0.1:3000/api/v1/tours/tours-within/400/center/${lt},${lg}/unit/mi`;
+    let url2 = `/api/v1/tours/tours-within/400/center/${lt},${lg}/unit/mi`;
 
     const res = await axios({
       method: 'GET',
@@ -28,20 +28,6 @@ export const getCoordinatesBOTH = async () => {
         response.data
       )
     );
-    // console.log(res.data);
-    // const data = res.data;
-
-    // //Promise.all(res1, res2);
-    // if (res.data.status === 'success') {
-    //   //   res.send(res);
-    //   window.setTimeout(
-    //     () => {
-    //       location.assign('/toursNearMe');
-    //     },
-    //     1500,
-    //     res.data
-    //   );
-    // }
   } catch (err) {
     console.log(err);
     showAlert('error', err);

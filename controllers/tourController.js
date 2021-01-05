@@ -51,7 +51,6 @@ exports.resizeTourImages = catchAsync(async (req, res, next) => {
       req.body.images.push(filename);
     })
   );
-  console.log(req.body);
   next();
 });
 
@@ -142,7 +141,6 @@ exports.getMonthlyPlan = catchAsync(async (req, res, next) => {
 exports.getToursWithin = catchAsync(async (req, res, next) => {
   // /tours-distance/233/center/33.994962, -117.984051/unit/mi
 
-  console.log('Aic e ' + req.query);
   const { distance, latlng, unit } = req.params;
   const [lat, lng] = latlng.split(',');
 

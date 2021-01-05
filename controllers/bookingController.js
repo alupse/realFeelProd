@@ -7,12 +7,9 @@ const AppError = require('./../utils/appError');
 const factory = require('./handlerFactory');
 const Email = require('../utils/email');
 
-console.log('Aici');
-
 exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   //Get currently booked tour session
   const tour = await Tour.findById(req.params.tourId);
-  console.log(tour);
 
   //create checkout getCheckoutSession
   const session = await stripe.checkout.sessions.create({
@@ -57,7 +54,6 @@ exports.createBookingCheckout = catchAsync(async (req, res, next) => {
     return next();
   }
   const book = await Booking.create({ tour, user, price });
-  console.log(user + 'Ce trimit');
   await new Email(userFound, `bla/api/v1/users/bla`).sendBookingConfirmation();
   res.redirect(`${req.protocol}://${req.get('host')}/`);
 });

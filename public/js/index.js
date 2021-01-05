@@ -6,7 +6,6 @@ import { login, logout } from './login.js';
 import { signup } from './signup.js';
 import { forgotPassword } from './forgotPassword.js';
 import { resetPassword } from './resetPassword.js';
-import { deleteUser } from './adminCrud.js';
 import { getCoordinatesBOTH } from './userCoordinates.js';
 import { updateSettings } from './updateSettings';
 import { leaveReview } from './leaveReview';
@@ -31,7 +30,6 @@ const delicn = document.querySelector('.iconDelete');
 const deleteUserBtn = document.getElementById('deleteBtn');
 const leaveReviewForm = document.querySelector('.form--leaveReview');
 
-console.log(document.getElementById('changeRoleButton') + '----------');
 //values
 //delegation
 
@@ -55,7 +53,6 @@ if (loginForm) {
 if (logOutBtn) logOutBtn.addEventListener('click', logout);
 if (nearMeBtn) {
   nearMeBtn.addEventListener('click', (e) => {
-    console.log('Intru in near me');
     getCoordinatesBOTH().subscribe;
   });
 }
@@ -66,9 +63,6 @@ if (deleteUserBtn)
     //   const userIdToDelete = document.getElementById('.id').value;
     //const { user._id} = e.target.dataset;
     //rId = document.getElementById('idUser').value;
-    console.log(document.getElementById('deleteBtn').idToDelete);
-    console.log('Intru in delete');
-    console.log(delicn);
 
     deleteUser();
   });
@@ -91,8 +85,7 @@ if (leaveReviewForm) {
     const reviewRatingValue = document.getElementById('reviewRatingValue')
       .value;
     const reviewText = document.getElementById('reviewText').value;
-    console.log(tourId);
-    console.log('miau');
+
     leaveReview(tourId, reviewRatingValue, reviewText);
   });
 }
