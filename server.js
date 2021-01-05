@@ -23,7 +23,7 @@ const getShortErrMessage = (err) => {
 const app = require('./app');
 //const port = process.env.PORT || 3000;
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const DB = process.env.DATABASE.replace(
   '<PASSWORD>',
