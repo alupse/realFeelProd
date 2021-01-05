@@ -18,13 +18,22 @@ router.get('/tour/:slug', authController.isLoggedIn, viewController.getTour);
 
 router.get('/signup', viewController.getSignupForm);
 
-router.get('/forgotPassword', viewController.getForgotPasswordForm);
+router.get(
+  '/forgotPassword',
+  authController.isLoggedIn,
+  viewController.getForgotPasswordForm
+);
 
 router.get('/resetPassword/:token', viewController.getResetPasswordForm);
 
 router.get('/login', authController.isLoggedIn, viewController.getLoginForm);
 
-router.get('/me', authController.protect, viewController.getAccount);
+router.get(
+  '/me',
+  authController.protect,
+  authController.isLoggedIn,
+  viewController.getAccount
+);
 
 router.get(
   '/my-tours',
@@ -63,6 +72,7 @@ router.get(
 router.get(
   '/top-5-cheap',
   authController.protect,
+  authController.isLoggedIn,
   tourController.alliasTopTours,
   viewController.getCheapestTours
 );
