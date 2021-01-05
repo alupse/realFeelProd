@@ -1,9 +1,11 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const Tour = require('./../models/tourModel');
+const User = require('./../models/userModel');
 const Booking = require('./../models/bookingModel');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
 const factory = require('./handlerFactory');
+const Email = require('../utils/email');
 
 console.log('Aici');
 
@@ -50,11 +52,13 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
 exports.createBookingCheckout = catchAsync(async (req, res, next) => {
   //Temporary cause it is unsecure, everyone can make bookings without paying
   const { tour, user, price } = req.query;
+  const userFound = await User.findById(user);
   if (!tour || !user || !price) {
     return next();
   }
   const book = await Booking.create({ tour, user, price });
-
+  console.log(user + 'Ce trimit');
+  await new Email(userFound, `bla/api/v1/users/bla`).sendBookingConfirmation();
   res.redirect(`${req.protocol}://${req.get('host')}/`);
 });
 
