@@ -49,11 +49,6 @@ app.use(cookieParser());
 // parse application/x-www-form-urlencoded
 
 // parse application/json
-app.post(
-  '/webhook-checkout',
-  bodyParser.raw({ type: '*/*' }),
-  bookingController.webhookCheckout
-);
 // app.use(bodyParser.json());
 
 app.set('view engine', 'pug');
