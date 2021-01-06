@@ -15,7 +15,7 @@ const signToken = (id) => {
 //    await user.desactivate();
 // }
 
-const createAndSendToken = (user, statusCode, res) => {
+const createAndSendToken = (user, statusCode, req, res) => {
   const token = signToken(user._id);
   const cookieOptions = {
     //converted it to miliseconds ; httpOnly prevetnts cross sites scripting attacks; secure to use only https(cant manipulate cookie in browser)
@@ -24,8 +24,9 @@ const createAndSendToken = (user, statusCode, res) => {
     ),
     httpOnly: true,
   };
-
-  if (!process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+  if (req.secure || req.headers('x-forwarded-proto') === 'https')
+    cookieOptions.secure = true;
+  //if (!process.env.NODE_ENV === 'production')
   res.cookie('jwt', token, cookieOptions);
 
   //remove the password from the output
@@ -45,7 +46,7 @@ exports.signUp = catchAsync(async (req, res, next) => {
   const url = `${req.protocol}://${req.get('host')}/me`;
   await new Email(newUser, url).sendWelcome();
 
-  createAndSendToken(newUser, 201, res);
+  createAndSendToken(newUser, 201, req, res);
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -70,9 +71,9 @@ exports.login = catchAsync(async (req, res, next) => {
   if (user.active === false) {
     const activatedUser = await User.updateOne({ active: true });
     alert('Account was reactivated');
-    createAndSendToken(activatedUser, 200, res);
+    createAndSendToken(activatedUser, 200, req, res);
   } else {
-    createAndSendToken(user, 200, res);
+    createAndSendToken(user, 200, req, res);
   }
 
   // 3 If everything is ok, send token to client
@@ -205,7 +206,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
   //4 Log the user in , send JWT
 
-  createAndSendToken(user, 200, res);
+  createAndSendToken(user, 200, req, res);
 });
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
@@ -225,7 +226,7 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
 
   await user.save();
 
-  createAndSendToken(user, 200, res);
+  createAndSendToken(user, 200, req, res);
 
   // 4 Log in , send JWT
 });

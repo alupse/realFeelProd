@@ -21,6 +21,9 @@ const viewRouter = require('./routes/viewRoutes');
 
 const app = express();
 
+//trust proxy
+app.enable('trust proxy');
+
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
