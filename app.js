@@ -24,6 +24,10 @@ const app = express();
 //trust proxy
 app.enable('trust proxy');
 
+//implement cors -Access-Control-Allow-Origin *
+app.use(cors());
+app.options('*', cors());
+
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
