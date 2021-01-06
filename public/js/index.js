@@ -4,7 +4,6 @@ import '@babel/polyfill';
 import { displayMap } from './mapbox';
 import { login, logout } from './login.js';
 import { signup } from './signup.js';
-import { showAlert } from './alerts';
 import { forgotPassword } from './forgotPassword.js';
 import { resetPassword } from './resetPassword.js';
 import { getCoordinatesBOTH } from './userCoordinates.js';
@@ -147,6 +146,3 @@ if (bookBtn)
     const { tourId } = e.target.dataset;
     bookTour(tourId);
   });
-
-const alertMessage = document.querySelector('body').dataset.alert;
-if (alertMessage) showAlert('success', alertMessage);
