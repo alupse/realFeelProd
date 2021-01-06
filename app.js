@@ -119,7 +119,7 @@ app.use(
 
 app.post(
   '/webhook-checkout',
-  express.raw({ type: 'application/json' }),
+  express.raw({ type: '*/*' }),
   bookingController.webhookCheckout
 );
 // Data sanitization against NOSql query injecion
