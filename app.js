@@ -41,6 +41,7 @@ app.use(
     },
   })
 );
+
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 app.use(cookieParser());
@@ -48,6 +49,11 @@ app.use(cookieParser());
 // parse application/x-www-form-urlencoded
 
 // parse application/json
+app.post(
+  '/webhook-checkout',
+  bodyParser.raw({ type: '*/*' }),
+  bookingController.webhookCheckout
+);
 app.use(bodyParser.json());
 
 app.set('view engine', 'pug');
@@ -117,11 +123,6 @@ app.use(
   })
 );
 
-app.post(
-  '/webhook-checkout',
-  bodyParser.raw({ type: '*/*' }),
-  bookingController.webhookCheckout
-);
 // Data sanitization against NOSql query injecion
 app.use(mongoSanitize());
 
