@@ -53,7 +53,7 @@ const sendErrorProd = (err, req, res) => {
       console.log(err.name);
       return res.status(err.statusCode).json({
         status: err.status,
-        message: 'Something went wrong.Please try again',
+        message: err.message,
       });
     }
     // B) Programming or other unknown error: don't leak error details
